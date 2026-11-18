@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STK Studio | Ingeniería y Arquitectura — Ing. Arq. Agustín Patraca H.</title>
+  <meta name="description" content="Despacho integral de Ingeniería y Arquitectura dirigido por el Ing. Arq. Agustín Patraca Hernández (IPN ESIA Tecamachalco). Proyectos ejecutivos, cálculo estructural NTC, gestoría D.R.O., topografía UTM, trámites RAN, STPS, CONAGUA y supervisión de obra." />
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              900: '#122E22',
+              800: '#1B4332',
+              700: '#2D6A4F',
+              600: '#40916C',
+              100: '#E8F0EC',
+              50: '#F4F8F6'
+            },
+            stonewarm: {
+              50: '#FAF9F6',
+              100: '#F1F5F3',
+              200: '#E2E8E5'
+            },
+            bronze: {
+              400: '#C5A059',
+              500: '#B08942',
+              600: '#8F6D31'
+            },
+            charcoal: '#1E293B'
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Patrón arquitectónico de retícula sutil */
+    .arch-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(27, 67, 50, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(27, 67, 50, 0.045) 1px, transparent 1px);
+    }
+    .arch-grid-dark {
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+    /* Animaciones suaves de aparición */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: all 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-stonewarm-50 text-charcoal font-sans antialiased selection:bg-forest-800 selection:text-white overflow-x-hidden">
+
+  <!-- Barra de Navegación Fija -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-stonewarm-50/90 backdrop-blur-md border-b border-forest-800/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logotipo Geométrico / Tipográfico -->
+        <a href="#inicio" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-xl bg-forest-800 text-white flex items-center justify-center shadow-md group-hover:bg-forest-700 transition-colors relative overflow-hidden">
+            <svg class="w-7 h-7" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 28V12L18 6L30 12V28" stroke="#C5A059" stroke-width="2" stroke-linecap="square"/>
+              <path d="M12 28V16L18 13L24 16V28" stroke="white" stroke-width="1.8"/>
+              <line x1="4" y1="28" x2="32" y2="28" stroke="#C5A059" stroke-width="2"/>
+            </svg>
+          </div>
+          <div>
+            <span class="block font-serif text-2xl font-bold tracking-wider text-forest-900 leading-none">STK STUDIO</span>
+            <span class="block text-[11px] uppercase tracking-[0.22em] text-forest-700 font-semibold mt-1">Ingeniería y Arquitectura</span>
+          </div>
+        </a>
+
+        <!-- Enlaces Desktop -->
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-charcoal/85">
+          <a href="#inicio" class="hover:text-forest-800 transition-colors">Inicio</a>
+          <a href="#servicios" class="hover:text-forest-800 transition-colors">Servicios</a>
+          <a href="#trayectoria" class="hover:text-forest-800 transition-colors">Trayectoria y Proyectos</a>
+          <a href="#cotizador" class="hover:text-forest-800 transition-colors">Cotizador Interactivo</a>
+          <a href="#contacto" class="hover:text-forest-800 transition-colors">Contacto</a>
+        </nav>
+
+        <!-- Botones Rápidos Header -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#cotizador" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-forest-800 border border-forest-800/25 hover:bg-forest-100 transition-all">
+            Estimar Proyecto
+          </a>
+          <a href="#contacto" class="px-5 py-2.5 rounded-xl text-sm font-semibold bg-forest-800 text-white hover:bg-forest-700 shadow-sm transition-all flex items-center gap-2">
+            <span>Agendar Consulta</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4 text-bronze-400"></i>
+          </a>
+        </div>
+
+        <!-- Botón Menú Móvil -->
+        <button id="mobile-menu-btn" aria-label="Abrir menú" class="lg:hidden p-2.5 rounded-xl text-forest-900 hover:bg-forest-100 transition-colors">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú Desplegable Móvil -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-forest-800/10 px-4 pt-2 pb-6 space-y-2 shadow-xl">
+      <a href="#inicio" class="mobile-link block px-4 py-3 rounded-xl font-medium hover:bg-forest-50 text-forest-900">Inicio</a>
+      <a href="#servicios" class="mobile-link block px-4 py-3 rounded-xl font-medium hover:bg-forest-50 text-forest-900">Servicios Integrales</a>
+      <a href="#trayectoria" class="mobile-link block px-4 py-3 rounded-xl font-medium hover:bg-forest-50 text-forest-900">Trayectoria y Proyectos</a>
+      <a href="#cotizador" class="mobile-link block px-4 py-3 rounded-xl font-medium hover:bg-forest-50 text-forest-900">Cotizador Interactivo</a>
+      <a href="#contacto" class="mobile-link block px-4 py-3 rounded-xl font-medium hover:bg-forest-50 text-forest-900">Contacto y Citas</a>
+      <div class="pt-3 flex flex-col gap-2">
+        <a href="https://wa.me/525638006027?text=Hola%20Ing.%20Arq.%20Agust%C3%ADn%20Patraca,%20me%20interesa%20una%20asesor%C3%ADa%20con%20STK%20Studio." target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-forest-800 text-white text-center font-semibold flex items-center justify-center gap-2">
+          <i data-lucide="message-circle" class="w-4 h-4"></i> Contactar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="inicio" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 arch-grid overflow-hidden">
+    <!-- Acentos decorativos sutiles -->
+    <div class="absolute top-24 right-0 w-96 h-96 bg-forest-700/10 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-bronze-400/10 rounded-full blur-3xl -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- Columna Izquierda: Mensaje Principal -->
+        <div class="lg:col-span-7 space-y-7 reveal active">
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-forest-100 border border-forest-800/15 text-forest-800 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-bronze-500 animate-pulse"></span>
+            <span>Dirección Técnica: Ing. Arq. Agustín Patraca Hernández • IPN ESIA Tecamachalco</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-forest-900 leading-[1.12] tracking-tight">
+            STK Studio <span class="block text-forest-700 italic font-semibold">Ingeniería y Arquitectura</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-charcoal/80 max-w-2xl leading-relaxed">
+            Soluciones integrales en <strong class="text-forest-900 font-semibold">diseño arquitectónico, ingeniería estructural, gestoría normativa y supervisión de obra</strong>. Transformamos ideas y predios en proyectos ejecutivos seguros, rentables y 100% regularizados bajo las normas vigentes en México.
+          </p>
+
+          <!-- Botones de Acción (CTA) -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#contacto" class="px-7 py-4 rounded-2xl bg-forest-800 hover:bg-forest-700 text-white font-semibold shadow-lg shadow-forest-900/15 transition-all flex items-center gap-2.5">
+              <i data-lucide="calendar-check" class="w-5 h-5 text-bronze-400"></i>
+              <span>Agendar Consulta</span>
+            </a>
+            <a href="#cotizador" class="px-7 py-4 rounded-2xl bg-white hover:bg-forest-50 text-forest-900 border border-forest-800/20 font-semibold shadow-sm transition-all flex items-center gap-2.5">
+              <i data-lucide="calculator" class="w-5 h-5 text-forest-700"></i>
+              <span>Cotizar Proyecto</span>
+            </a>
+          </div>
+
+          <!-- Indicadores de Respaldo Técnico -->
+          <div class="pt-6 border-t border-forest-800/10">
+            <p class="text-xs uppercase tracking-widest text-forest-700 font-bold mb-3">Respaldo Técnico y Normativo</p>
+            <div class="flex flex-wrap gap-2.5 text-xs font-medium text-charcoal">
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-forest-800/15 shadow-xs">IPN ESIA Tecamachalco</span>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-forest-800/15 shadow-xs">Experiencia Directa con D.R.O.</span>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-forest-800/15 shadow-xs">Normatividad NTC 2020–2026</span>
+              <span class="px-3 py-1.5 rounded-lg bg-white border border-forest-800/15 shadow-xs">CONAGUA • STPS • UVIE • RAN</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Tarjeta Ejecutiva de Especialidades -->
+        <div class="lg:col-span-5 reveal active">
+          <div class="bg-forest-900 text-white rounded-3xl p-7 sm:p-9 shadow-2xl border border-forest-700/40 relative overflow-hidden arch-grid-dark">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-bronze-400/15 rounded-bl-full"></div>
+            
+            <div class="flex items-center justify-between border-b border-white/15 pb-5 mb-6">
+              <div>
+                <span class="text-xs uppercase tracking-widest text-bronze-400 font-semibold">Ficha Técnica del Despacho</span>
+                <h2 class="font-serif text-2xl font-bold mt-1">Rigor Estructural y Diseño</h2>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-bronze-400">
+                <i data-lucide="compass" class="w-6 h-6"></i>
+              </div>
+            </div>
+
+            <ul class="space-y-4 text-sm text-white/90">
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-bronze-400 shrink-0 mt-0.5"></i>
+                <span><strong>Proyectos Ejecutivos y Condominios:</strong> Obra nueva, ampliación, casa dúplex, régimen de condominio y memorias descriptivas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-bronze-400 shrink-0 mt-0.5"></i>
+                <span><strong>Ingeniería Estructural (NTC):</strong> Análisis por elementos finitos (SAP2000, ETABS, STAAD) y dictámenes estructurales STPS.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-bronze-400 shrink-0 mt-0.5"></i>
+                <span><strong>Topografía UTM y Agrimensura:</strong> Subdivisión de predios, planos georreferenciados y gestión ante el Registro Agrario Nacional (RAN).</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-bronze-400 shrink-0 mt-0.5"></i>
+                <span><strong>Residencia y Control de Obra:</strong> Bitácoras, números generadores, precios unitarios (Neodata), planos As-Built y avalúos.</span>
+              </li>
+            </ul>
+
+            <div class="mt-7 pt-5 border-t border-white/15 flex items-center justify-between text-xs text-white/75">
+              <span>CDMX y Estado de México</span>
+              <span class="text-bronze-400 font-semibold">Atención Personalizada de Principio a Fin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Métricas Animadas -->
+      <div id="metrics-bar" class="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 reveal">
+        <div class="bg-white rounded-2xl p-6 border border-forest-800/10 shadow-sm">
+          <div class="flex items-baseline gap-1 text-forest-800 font-serif text-4xl sm:text-5xl font-bold">
+            <span>+</span><span class="counter" data-target="3">0</span>
+          </div>
+          <p class="text-sm font-semibold text-charcoal mt-2">Años con D.R.O. 314</p>
+          <p class="text-xs text-charcoal/65 mt-1">A cargo del área de proyecto, diseño y licencias.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-forest-800/10 shadow-sm">
+          <div class="flex items-baseline gap-1 text-forest-800 font-serif text-4xl sm:text-5xl font-bold">
+            <span class="counter" data-target="100">0</span><span>%</span>
+          </div>
+          <p class="text-sm font-semibold text-charcoal mt-2">Cumplimiento Normativo</p>
+          <p class="text-xs text-charcoal/65 mt-1">NTC, CONAGUA, STPS, UVIE y trámites RAN.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-forest-800/10 shadow-sm">
+          <div class="flex items-baseline gap-1 text-forest-800 font-serif text-4xl sm:text-5xl font-bold">
+            <span>+</span><span class="counter" data-target="12">0</span>
+          </div>
+          <p class="text-sm font-semibold text-charcoal mt-2">Herramientas BIM & CAD</p>
+          <p class="text-xs text-charcoal/65 mt-1">AutoCAD, Revit, SAP2000, ETABS, QGIS y Neodata.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-forest-800/10 shadow-sm">
+          <div class="flex items-baseline gap-1 text-forest-800 font-serif text-4xl sm:text-5xl font-bold">
+            <span>360°</span>
+          </div>
+          <p class="text-sm font-semibold text-charcoal mt-2">Gestión Integral</p>
+          <p class="text-xs text-charcoal/65 mt-1">Desde el levantamiento y planos hasta entrega de obra.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo Integral de Servicios -->
+  <section id="servicios" class="py-20 lg:py-28 bg-white border-y border-forest-800/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-14 reveal">
+        <span class="text-xs uppercase tracking-[0.22em] text-bronze-600 font-bold">Especialidades Técnicas</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-forest-900 mt-2">Catálogo Integral de Servicios</h2>
+        <p class="text-charcoal/75 mt-4 text-base sm:text-lg">
+          Combinamos rigor matemático, dominio de normativas vigentes y visualización arquitectónica avanzada para resolver cada etapa de tu proyecto.
+        </p>
+      </div>
+
+      <!-- Pestañas de Categorías Interactivas -->
+      <div class="flex flex-wrap justify-center gap-2.5 mb-12 reveal" role="tablist">
+        <button class="service-tab active px-5 py-3 rounded-xl text-sm font-semibold transition-all bg-forest-800 text-white shadow-sm" data-category="all">
+          Todos los Servicios
+        </button>
+        <button class="service-tab px-5 py-3 rounded-xl text-sm font-semibold transition-all bg-stonewarm-100 text-charcoal hover:bg-forest-100" data-category="arquitectura">
+          Arquitectura y Diseño
+        </button>
+        <button class="service-tab px-5 py-3 rounded-xl text-sm font-semibold transition-all bg-stonewarm-100 text-charcoal hover:bg-forest-100" data-category="estructuras">
+          Estructuras e Instalaciones
+        </button>
+        <button class="service-tab px-5 py-3 rounded-xl text-sm font-semibold transition-all bg-stonewarm-100 text-charcoal hover:bg-forest-100" data-category="topografia">
+          Topografía y Gestoría
+        </button>
+        <button class="service-tab px-5 py-3 rounded-xl text-sm font-semibold transition-all bg-stonewarm-100 text-charcoal hover:bg-forest-100" data-category="supervision">
+          Supervisión y Costos
+        </button>
+      </div>
+
+      <!-- Grid de Tarjetas de Servicios -->
+      <div class="grid md:grid-cols-2 gap-8" id="services-grid">
+        
+        <!-- 1. Arquitectura y Diseño -->
+        <article class="service-card bg-stonewarm-50 rounded-3xl p-8 border border-forest-800/12 hover:border-forest-700/40 hover:shadow-xl transition-all flex flex-col justify-between reveal" data-category="arquitectura">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-forest-800 text-white flex items-center justify-center shadow-md">
+                <i data-lucide="pen-tool" class="w-7 h-7 text-bronze-400"></i>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-forest-100 text-forest-800">Diseño & BIM</span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-forest-900 mb-3">Arquitectura y Diseño Ejecutivo</h3>
+            <p class="text-sm text-charcoal/80 leading-relaxed mb-5">
+              Desarrollo completo de proyectos arquitectónicos y ejecutivos para <strong>obra nueva, ampliación y remodelación</strong>, cuidando la funcionalidad espacial, estética y cumplimiento reglamentario.
+            </p>
+            <ul class="space-y-2.5 text-sm text-charcoal/85 mb-6">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Régimen de Condominio y Casa Dúplex:</strong> Planos arquitectónicos detallados, tablas de indivisos y memorias arquitectónicas descriptivas.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Diseño de Interiores y Levantamientos:</strong> Levantamiento arquitectónico físico, registro fotográfico detallado y remodelación interior.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Modelado 3D y Renderizado Fotorrealista:</strong> AutoCAD, Revit, SketchUp, 3ds Max, V-Ray, Enscape y D5 Render (iluminación PBR natural y nocturna).</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-5 border-t border-forest-800/10 flex items-center justify-between">
+            <span class="text-xs font-semibold text-forest-700">AutoCAD • Revit • 3ds Max • V-Ray</span>
+            <button onclick="openServiceModal('arquitectura')" class="text-sm font-bold text-forest-900 hover:text-bronze-600 flex items-center gap-1.5 transition-colors">
+              <span>Ver alcances</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- 2. Ingeniería Estructural e Instalaciones -->
+        <article class="service-card bg-stonewarm-50 rounded-3xl p-8 border border-forest-800/12 hover:border-forest-700/40 hover:shadow-xl transition-all flex flex-col justify-between reveal" data-category="estructuras">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-forest-800 text-white flex items-center justify-center shadow-md">
+                <i data-lucide="layers" class="w-7 h-7 text-bronze-400"></i>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-forest-100 text-forest-800">NTC & Seguridad</span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-forest-900 mb-3">Ingeniería Estructural e Instalaciones</h3>
+            <p class="text-sm text-charcoal/80 leading-relaxed mb-5">
+              Cálculo, modelado matricial y diseño estructural bajo las <strong>Normas Técnicas Complementarias (NTC 2020–2026)</strong>, asegurando estabilidad sísmica y eficiencia en materiales.
+            </p>
+            <ul class="space-y-2.5 text-sm text-charcoal/85 mb-6">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Cálculo Estructural y Elementos Finitos:</strong> Cimentaciones, losas, columnas y trabes en SAP2000, ETABS y STAAD.Pro, incluyendo estructuras especiales (bambú y acero).</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Dictámenes STPS:</strong> Inspección técnica, detección de fallas y emisión de Dictámenes de Estabilidad Estructural para centros de trabajo.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Ingenierías MEP, UVIE y CONAGUA:</strong> Proyección de instalaciones hidráulicas, sanitarias y eléctricas, certificación eléctrica UVIE y factibilidad de agua CONAGUA.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-5 border-t border-forest-800/10 flex items-center justify-between">
+            <span class="text-xs font-semibold text-forest-700">SAP2000 • ETABS • STPS • UVIE • CONAGUA</span>
+            <button onclick="openServiceModal('estructuras')" class="text-sm font-bold text-forest-900 hover:text-bronze-600 flex items-center gap-1.5 transition-colors">
+              <span>Ver alcances</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- 3. Topografía, Agrimensura y Gestoría Normativa -->
+        <article class="service-card bg-stonewarm-50 rounded-3xl p-8 border border-forest-800/12 hover:border-forest-700/40 hover:shadow-xl transition-all flex flex-col justify-between reveal" data-category="topografia">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-forest-800 text-white flex items-center justify-center shadow-md">
+                <i data-lucide="map-pin" class="w-7 h-7 text-bronze-400"></i>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-forest-100 text-forest-800">D.R.O. & RAN</span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-forest-900 mb-3">Topografía, Agrimensura y Gestoría Normativa</h3>
+            <p class="text-sm text-charcoal/80 leading-relaxed mb-5">
+              Certeza jurídica y técnica para tu patrimonio mediante levantamientos georreferenciados y gestión integral ante dependencias municipales, estatales y federales.
+            </p>
+            <ul class="space-y-2.5 text-sm text-charcoal/85 mb-6">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Topografía UTM y Agrimensura:</strong> Planos topográficos con coordenadas UTM, sistemas de información geográfica (QGIS) y subdivisión de predios.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Trámites ante el RAN:</strong> Integración técnica y gestión de expedientes ante el Registro Agrario Nacional.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Licencias y Regularización:</strong> Licencias de construcción, regularización de inmuebles, permisos de demolición, alineamientos, números oficiales y cambios de uso de suelo.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-5 border-t border-forest-800/10 flex items-center justify-between">
+            <span class="text-xs font-semibold text-forest-700">Coordenadas UTM • QGIS • RAN • Licencias</span>
+            <button onclick="openServiceModal('topografia')" class="text-sm font-bold text-forest-900 hover:text-bronze-600 flex items-center gap-1.5 transition-colors">
+              <span>Ver alcances</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- 4. Supervisión, Residencia de Obra y Costos -->
+        <article class="service-card bg-stonewarm-50 rounded-3xl p-8 border border-forest-800/12 hover:border-forest-700/40 hover:shadow-xl transition-all flex flex-col justify-between reveal" data-category="supervision">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-14 h-14 rounded-2xl bg-forest-800 text-white flex items-center justify-center shadow-md">
+                <i data-lucide="hard-hat" class="w-7 h-7 text-bronze-400"></i>
+              </div>
+              <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-forest-100 text-forest-800">Control & Obra</span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-forest-900 mb-3">Supervisión, Residencia de Obra y Costos</h3>
+            <p class="text-sm text-charcoal/80 leading-relaxed mb-5">
+              Administración rigurosa en campo para garantizar calidad constructiva, cumplimiento de tiempos y transparencia financiera en cada peso invertido.
+            </p>
+            <ul class="space-y-2.5 text-sm text-charcoal/85 mb-6">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Residencia y Dirección de Obra:</strong> Coordinación de cuadrillas (albañilería, tablaroca, instalaciones), bitácora de obra, requisición de materiales y seguridad.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Ingeniería de Costos (Neodata):</strong> Catálogos de conceptos, precios unitarios, números generadores, estimaciones, conciliaciones y planos As-Built.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-forest-700 shrink-0 mt-1"></i>
+                <span><strong>Avalúos Comerciales:</strong> Levantamientos arquitectónicos, hidráulicos y físicos especializados para soporte de avalúos comerciales de inmuebles.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pt-5 border-t border-forest-800/10 flex items-center justify-between">
+            <span class="text-xs font-semibold text-forest-700">Neodata • As-Built • Generadores • Avalúos</span>
+            <button onclick="openServiceModal('supervision')" class="text-sm font-bold text-forest-900 hover:text-bronze-600 flex items-center gap-1.5 transition-colors">
+              <span>Ver alcances</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Portafolio de Experiencia y Proyectos Destacados -->
+  <section id="trayectoria" class="py-20 lg:py-28 arch-grid">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-6 reveal">
+        <div class="max-w-2xl">
+          <span class="text-xs uppercase tracking-[0.22em] text-bronze-600 font-bold">Experiencia Comprobada</span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-forest-900 mt-2">Trayectoria y Proyectos Destacados</h2>
+          <p class="text-charcoal/75 mt-3 text-base sm:text-lg">
+            Experiencia real en infraestructura institucional de salud, gestión con Director Responsable de Obra (D.R.O.), visualización internacional y docencia universitaria.
+          </p>
+        </div>
+        <div class="bg-white px-5 py-3.5 rounded-2xl border border-forest-800/15 shadow-xs text-sm">
+          <span class="text-charcoal/70">Formación Académica:</span>
+          <strong class="block text-forest-900 font-bold">Ing. Arquitecto — IPN ESIA Tecamachalco</strong>
+        </div>
+      </div>
+
+      <!-- 4 Pilares de Experiencia -->
+      <div class="grid lg:grid-cols-2 gap-8">
+        
+        <!-- Proyecto 1: IMSS -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-forest-800/12 shadow-sm hover:shadow-xl transition-all reveal group">
+          <div class="bg-forest-900 p-7 text-white relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs uppercase tracking-widest text-bronze-400 font-bold">Sector Salud e Institucional</span>
+              <i data-lucide="building-2" class="w-6 h-6 text-bronze-400"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold mt-2">Infraestructura Institucional y Salud (IMSS)</h3>
+            <p class="text-xs text-white/75 mt-1">Residencia de Obra, Mantenimiento Integral e Inspección Estructural</p>
+          </div>
+          <div class="p-7 space-y-4">
+            <p class="text-sm text-charcoal/80 leading-relaxed">
+              Dirección en campo, supervisión de plantilla superior a 15 especialistas, control de presupuestos, compra directa de insumos, estimaciones y planos As-Built en inmuebles estratégicos en operación:
+            </p>
+            <div class="grid sm:grid-cols-2 gap-2.5 text-xs font-medium">
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>IMSS Reforma (Oficinas Centrales)</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Hospital General La Raza</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>IMSS Villalongín</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Guarderías No. 12 y No. 15 CDMX</span>
+              </div>
+            </div>
+            <p class="text-xs text-charcoal/65 pt-2 border-t border-forest-800/10">
+              Incluye inspección y registro fotográfico para detección de fallas estructurales en Guardería No. 12 (San Pedro Xalpa) y Guardería No. 15 (Santiago Atzacoalco).
+            </p>
+          </div>
+        </div>
+
+        <!-- Proyecto 2: Colaboración con D.R.O. -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-forest-800/12 shadow-sm hover:shadow-xl transition-all reveal group">
+          <div class="bg-forest-800 p-7 text-white relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs uppercase tracking-widest text-bronze-400 font-bold">3 Años • D.R.O. 314 Edo. Méx.</span>
+              <i data-lucide="file-check-2" class="w-6 h-6 text-bronze-400"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold mt-2">Colaboración con D.R.O. y Gestoría Técnica</h3>
+            <p class="text-xs text-white/75 mt-1">AAMAC Arquitectos — Encargado del Área de Proyecto y Diseño (2023 – Jun. 2026)</p>
+          </div>
+          <div class="p-7 space-y-4">
+            <p class="text-sm text-charcoal/80 leading-relaxed">
+              Liderazgo del área de proyecto y diseño bajo supervisión del D.R.O. Francisco Javier Navarro García, gestionando la atención directa al cliente desde la prospección y cotización hasta el cierre de obra y trámites:
+            </p>
+            <div class="grid sm:grid-cols-2 gap-2.5 text-xs font-medium">
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Régimen de Condominio y Dúplex</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="compass" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Topografía UTM y Trámites RAN</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="zap" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Dictámenes STPS, UVIE y CONAGUA</span>
+              </div>
+              <div class="p-3 rounded-xl bg-stonewarm-100 text-forest-900 flex items-center gap-2">
+                <i data-lucide="home" class="w-4 h-4 text-forest-700 shrink-0"></i>
+                <span>Regularización y Avalúos Comerciales</span>
+              </div>
+            </div>
+            <p class="text-xs text-charcoal/65 pt-2 border-t border-forest-800/10">
+              Respaldado por carta de recomendación oficial por desempeño, responsabilidad y competencia técnica en dirección de proyectos.
+            </p>
+          </div>
+        </div>
+
+        <!-- Proyecto 3: Visualización Internacional y Urbana -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-forest-800/12 shadow-sm hover:shadow-xl transition-all reveal group">
+          <div class="bg-charcoal p-7 text-white relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs uppercase tracking-widest text-bronze-400 font-bold">Modelado BIM/3D & Obra Pública</span>
+              <i data-lucide="box" class="w-6 h-6 text-bronze-400"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold mt-2">Visualización Internacional y Urbanismo</h3>
+            <p class="text-xs text-white/75 mt-1">Mia Renders (Proyectos Europeos) & Municipio de Papantla, Veracruz</p>
+          </div>
+          <div class="p-7 space-y-4">
+            <p class="text-sm text-charcoal/80 leading-relaxed">
+              Ejecución de proyectos de visualización arquitectónica de alta precisión y diseño de identidad urbana institucional:
+            </p>
+            <ul class="space-y-2.5 text-xs text-charcoal/85">
+              <li class="p-3 rounded-xl bg-stonewarm-100">
+                <strong class="text-forest-900 block mb-0.5">Mia Renders (Interpretación Técnica en Italiano):</strong>
+                Levantamiento de edificios 3D en SketchUp organizados por grupos, modelado avanzado en 3ds Max con materiales PBR, iluminación exterior/nocturna e interpretación de planos técnicos en idioma italiano.
+              </li>
+              <li class="p-3 rounded-xl bg-stonewarm-100">
+                <strong class="text-forest-900 block mb-0.5">Arch Kirei / Gobierno Municipal de Papantla:</strong>
+                Diseño y desarrollo de iconografía institucional y estampado municipal para carreteras y vialidades del municipio, con lectura de planos ejecutivos.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Proyecto 4: Estructuras Especiales y Academia -->
+        <div class="bg-white rounded-3xl overflow-hidden border border-forest-800/12 shadow-sm hover:shadow-xl transition-all reveal group">
+          <div class="bg-forest-700 p-7 text-white relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs uppercase tracking-widest text-bronze-400 font-bold">Sostenibilidad & Docencia Superior</span>
+              <i data-lucide="graduation-cap" class="w-6 h-6 text-bronze-400"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold mt-2">Estructuras Especiales y Academia</h3>
+            <p class="text-xs text-white/75 mt-1">Ingeniería Sostenible en Hidalgo & Universidad Tecnológica El Puerto</p>
+          </div>
+          <div class="p-7 space-y-4">
+            <p class="text-sm text-charcoal/80 leading-relaxed">
+              Aplicación de criterios estructurales avanzados tanto en sistemas constructivos alternativos como en la formación de futuros profesionistas:
+            </p>
+            <ul class="space-y-2.5 text-xs text-charcoal/85">
+              <li class="p-3 rounded-xl bg-stonewarm-100">
+                <strong class="text-forest-900 block mb-0.5">Casa de Bambú — Tlanchinol, Hidalgo:</strong>
+                Cálculo estructural, modelado tridimensional y desarrollo de planos ejecutivos para vivienda sostenible con materiales naturales.
+              </li>
+              <li class="p-3 rounded-xl bg-stonewarm-100">
+                <strong class="text-forest-900 block mb-0.5">Docencia Universitaria — Universidad Tecnológica El Puerto:</strong>
+                Profesor titular de las asignaturas de <em>Estructuras</em> e <em>Introducción a AutoCAD</em>, formando alumnos en análisis estructural y dibujo técnico profesional.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculadora / Estimador Interactivo de Honorarios -->
+  <section id="cotizador" class="py-20 lg:py-28 bg-forest-900 text-white arch-grid-dark relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-12 reveal">
+        <span class="text-xs uppercase tracking-[0.22em] text-bronze-400 font-bold">Herramienta de Planeación</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold mt-2">Estimador Interactivo de Honorarios</h2>
+        <p class="text-white/75 mt-3 text-base">
+          Calcula un presupuesto preliminar en pesos mexicanos (MXN) según el tipo de servicio técnico, superficie y complejidad de tu inmueble, y envíalo directamente para formalizar tu cotización.
+        </p>
+      </div>
+
+      <div class="bg-white text-charcoal rounded-3xl p-6 sm:p-10 shadow-2xl grid lg:grid-cols-12 gap-8 items-center reveal">
+        <!-- Controles del Cotizador -->
+        <div class="lg:col-span-7 space-y-6">
+          <div>
+            <label for="calc-service" class="block text-sm font-bold text-forest-900 mb-2">1. Selecciona el Servicio Técnico</label>
+            <select id="calc-service" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-charcoal font-medium focus:outline-none focus:ring-2 focus:ring-forest-700">
+              <option value="proyecto">Proyecto Arquitectónico y Ejecutivo (Obra Nueva / Ampliación)</option>
+              <option value="estructural">Cálculo Estructural y Planos (Normas NTC 2020–2026)</option>
+              <option value="topografia">Levantamiento Topográfico UTM / Agrimensura / Trámite RAN</option>
+              <option value="regularizacion">Regularización de Inmueble / Dictamen Estructural STPS / D.R.O.</option>
+              <option value="render">Modelado 3D y Renderizado Fotorrealista (Paquete Integral)</option>
+              <option value="supervision">Supervisión y Residencia de Obra / Generadores y Costos</option>
+            </select>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="calc-property" class="block text-sm font-bold text-forest-900 mb-2">2. Tipo de Inmueble</label>
+              <select id="calc-property" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-charcoal font-medium focus:outline-none focus:ring-2 focus:ring-forest-700">
+                <option value="1.0">Residencial Unifamiliar</option>
+                <option value="1.2">Casa Dúplex / Régimen de Condominio</option>
+                <option value="1.45">Comercial / Oficinas / Nave Industrial</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="calc-sqm" class="block text-sm font-bold text-forest-900 mb-2">3. Superficie Estimada (m²)</label>
+              <div class="relative">
+                <input type="number" id="calc-sqm" min="20" max="50000" value="150" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-charcoal font-bold focus:outline-none focus:ring-2 focus:ring-forest-700" />
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-forest-700">m²</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider rápido de m2 -->
+          <div>
+            <div class="flex justify-between text-xs text-charcoal/65 mb-1.5">
+              <span>20 m²</span>
+              <span>Ajuste rápido de superficie</span>
+              <span>2,500 m²</span>
+            </div>
+            <input type="range" id="calc-slider" min="20" max="2500" step="10" value="150" class="w-full accent-forest-800 cursor-pointer" />
+          </div>
+
+          <!-- Extras opcionales -->
+          <div class="pt-2">
+            <span class="block text-sm font-bold text-forest-900 mb-2.5">4. Alcances Complementarios (Opcional)</span>
+            <div class="grid sm:grid-cols-2 gap-3 text-xs font-medium">
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-stonewarm-50 border border-forest-800/15 cursor-pointer hover:bg-forest-50">
+                <input type="checkbox" id="extra-memoria" class="w-4 h-4 accent-forest-800 rounded" />
+                <span>Memoria Descriptiva / Condominio</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-stonewarm-50 border border-forest-800/15 cursor-pointer hover:bg-forest-50">
+                <input type="checkbox" id="extra-instalaciones" class="w-4 h-4 accent-forest-800 rounded" />
+                <span>Ingenierías (Hidráulica, Sanitaria, Eléctrica)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel de Resultado de Cotización -->
+        <div class="lg:col-span-5 bg-stonewarm-100 rounded-2xl p-6 sm:p-8 border border-forest-800/15 flex flex-col justify-between h-full">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-forest-700 mb-2">
+              <span>Estimado Preliminar</span>
+              <span class="px-2.5 py-0.5 rounded-md bg-white text-forest-900 border border-forest-800/10">MXN</span>
+            </div>
+            
+            <div class="my-4">
+              <div id="calc-total" class="font-serif text-3xl sm:text-4xl font-bold text-forest-900">$27,000 – $32,400 MXN</div>
+              <p id="calc-summary" class="text-xs text-charcoal/75 mt-2 leading-relaxed">
+                Basado en 150 m² para Residencial Unifamiliar • Proyecto Arquitectónico y Ejecutivo.
+              </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 text-xs text-charcoal/80 space-y-2 border border-forest-800/10 mb-6">
+              <div class="flex items-center gap-2 text-forest-800 font-semibold">
+                <i data-lucide="info" class="w-4 h-4 shrink-0"></i>
+                <span>Incluye asesoría técnica inicial</span>
+              </div>
+              <p>Este cálculo es una referencia paramétrica. El presupuesto definitivo se ajusta tras revisar ubicación del predio, antecedentes documentales y alcances específicos.</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <button id="send-quote-wa" class="w-full py-3.5 px-5 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+              <i data-lucide="message-circle" class="w-4 h-4 text-bronze-400"></i>
+              <span>Enviar Cotización por WhatsApp</span>
+            </button>
+            <button id="send-quote-email" class="w-full py-3 px-5 rounded-xl bg-white hover:bg-forest-50 text-forest-900 border border-forest-800/20 font-semibold text-sm transition-all flex items-center justify-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-forest-700"></i>
+              <span>Solicitar Propuesta Formal por Correo</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Contacto y Agendamiento de Consultas -->
+  <section id="contacto" class="py-20 lg:py-28 bg-stonewarm-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12">
+        
+        <!-- Columna Izquierda: Información Directa y Canales -->
+        <div class="lg:col-span-5 space-y-7 reveal">
+          <div>
+            <span class="text-xs uppercase tracking-[0.22em] text-bronze-600 font-bold">Atención Directa</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-forest-900 mt-2">Iniciemos tu Proyecto</h2>
+            <p class="text-charcoal/75 mt-3 text-sm sm:text-base leading-relaxed">
+              Agenda una consulta técnica presencial o virtual para analizar la viabilidad normativa, estructural y financiera de tu obra o trámite.
+            </p>
+          </div>
+
+          <!-- Botones Rápidos de Cita Virtual y WhatsApp -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            <a href="https://meet.google.com/new" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-forest-800 hover:bg-forest-700 text-white flex items-center justify-between shadow-md transition-all group">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-bronze-400">
+                  <i data-lucide="video" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="block font-bold text-sm">Videollamada en Google Meet</span>
+                  <span class="block text-xs text-white/75">Revisión de planos y asesoría remota</span>
+                </div>
+              </div>
+              <i data-lucide="external-link" class="w-4 h-4 text-bronze-400 group-hover:translate-x-0.5 transition-transform"></i>
+            </a>
+
+            <a href="https://wa.me/525638006027?text=Hola%20Ing.%20Arq.%20Agust%C3%ADn%20Patraca,%20me%20gustar%C3%ADa%20agendar%20una%20consulta%20con%20STK%20Studio." target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-white hover:bg-forest-50 text-forest-900 border border-forest-800/20 flex items-center justify-between shadow-xs transition-all group">
+              <div class="flex items-center gap-3.5">
+                <div class="w-10 h-10 rounded-xl bg-forest-100 flex items-center justify-center text-forest-800">
+                  <i data-lucide="message-square" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <span class="block font-bold text-sm">WhatsApp Business Directo</span>
+                  <span class="block text-xs text-charcoal/70">Respuesta ágil: 56 3800 6027</span>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-forest-700"></i>
+            </a>
+          </div>
+
+          <!-- Datos de Contacto Completos -->
+          <div class="bg-white rounded-3xl p-6 sm:p-7 border border-forest-800/12 space-y-5 shadow-xs">
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="user-check" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-forest-700">Director del Despacho</span>
+                <p class="font-bold text-forest-900 text-sm mt-0.5">Ing. Arq. Agustín Patraca Hernández</p>
+                <p class="text-xs text-charcoal/70">Egresado del Instituto Politécnico Nacional (ESIA Tecamachalco)</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-forest-700">Teléfonos de Atención</span>
+                <p class="text-sm font-semibold text-charcoal mt-0.5">Fijo: <a href="tel:5521582461" class="hover:text-forest-800">55 2158 2461</a></p>
+                <p class="text-sm font-semibold text-charcoal">Celular / WA: <a href="tel:5638006027" class="hover:text-forest-800">56 3800 6027</a></p>
+                <p class="text-xs text-charcoal/75">Alternativo: <a href="tel:5631407380" class="hover:text-forest-800">56 3140 7380</a></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </div>
+              <div class="break-all">
+                <span class="text-xs font-bold uppercase tracking-wider text-forest-700">Correos Electrónicos</span>
+                <p class="text-sm font-semibold text-charcoal mt-0.5">
+                  <a href="mailto:arquitecturastudiok@gmail.com" class="hover:text-forest-800">arquitecturastudiok@gmail.com</a>
+                </p>
+                <p class="text-xs text-charcoal/75 mt-0.5">
+                  <a href="mailto:patracahernandezadal@gmail.com" class="hover:text-forest-800">patracahernandezadal@gmail.com</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-9 h-9 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-forest-700">Cobertura y Ubicación</span>
+                <p class="text-sm font-medium text-charcoal mt-0.5">Villa Nicolás Romero / Atizapán de Zaragoza, Estado de México y CDMX.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Formulario Interactivo de Consulta -->
+        <div class="lg:col-span-7 reveal">
+          <div class="bg-white rounded-3xl p-7 sm:p-10 border border-forest-800/12 shadow-lg">
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-forest-900">Solicitar Consulta Técnica o Cotización</h3>
+            <p class="text-sm text-charcoal/70 mt-1.5 mb-7">Completa los datos de tu proyecto y elige cómo deseas enviar tu solicitud al despacho.</p>
+
+            <form id="contact-form" class="space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="form-name" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Nombre Completo *</label>
+                  <input type="text" id="form-name" required placeholder="Ej. Arq. Carlos Mendoza / Empresa" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700" />
+                </div>
+                <div>
+                  <label for="form-phone" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Teléfono / WhatsApp *</label>
+                  <input type="tel" id="form-phone" required placeholder="Ej. 55 1234 5678" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="form-email" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Correo Electrónico</label>
+                  <input type="email" id="form-email" placeholder="cliente@correo.com" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700" />
+                </div>
+                <div>
+                  <label for="form-service" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Área de Interés *</label>
+                  <select id="form-service" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-forest-700">
+                    <option value="Proyecto Arquitectónico / Ejecutivo">Proyecto Arquitectónico / Ejecutivo</option>
+                    <option value="Cálculo Estructural (NTC) / Dictamen STPS">Cálculo Estructural (NTC) / Dictamen STPS</option>
+                    <option value="Topografía UTM / Agrimensura / Trámite RAN">Topografía UTM / Agrimensura / Trámite RAN</option>
+                    <option value="Gestoría D.R.O. / Licencias / Régimen Condominio">Gestoría D.R.O. / Licencias / Régimen Condominio</option>
+                    <option value="Supervisión y Residencia de Obra / Costos">Supervisión y Residencia de Obra / Costos</option>
+                    <option value="Modelado 3D y Renderizado">Modelado 3D y Renderizado</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="form-location" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Ubicación del Predio o Inmueble</label>
+                <input type="text" id="form-location" placeholder="Municipio / Alcaldía, Estado (ej. Atizapán, Nicolás Romero, CDMX)" class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700" />
+              </div>
+
+              <div>
+                <label for="form-message" class="block text-xs font-bold uppercase tracking-wider text-forest-900 mb-2">Descripción del Proyecto o Requerimiento *</label>
+                <textarea id="form-message" rows="4" required placeholder="Indica superficie aproximada, tipo de obra (nueva, ampliación, regularización, dictamen, topografía) y fecha deseada..." class="w-full px-4 py-3.5 rounded-xl bg-stonewarm-50 border border-forest-800/20 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700"></textarea>
+              </div>
+
+              <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                <button type="submit" class="flex-1 py-4 px-6 rounded-xl bg-forest-800 hover:bg-forest-700 text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="send" class="w-4 h-4 text-bronze-400"></i>
+                  <span>Enviar Solicitud por WhatsApp</span>
+                </button>
+                <button type="button" id="form-email-btn" class="py-4 px-6 rounded-xl bg-stonewarm-100 hover:bg-forest-100 text-forest-900 border border-forest-800/20 font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="mail" class="w-4 h-4 text-forest-700"></i>
+                  <span>Enviar por Correo</span>
+                </button>
+              </div>
+
+              <!-- Mensaje de confirmación inline -->
+              <div id="form-feedback" class="hidden p-4 rounded-xl bg-forest-100 border border-forest-700/30 text-forest-900 text-sm font-medium"></div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Profesional -->
+  <footer class="bg-forest-900 text-white/85 pt-16 pb-10 border-t border-forest-700/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/15">
+        <!-- Marca -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-bronze-400 font-serif font-bold text-xl">STK</div>
+            <div>
+              <span class="block font-serif text-xl font-bold text-white tracking-wider">STK STUDIO</span>
+              <span class="block text-[10px] uppercase tracking-[0.2em] text-bronze-400">Ingeniería y Arquitectura</span>
+            </div>
+          </div>
+          <p class="text-sm text-white/70 max-w-md leading-relaxed">
+            Despacho de arquitectura, ingeniería estructural, gestoría normativa y supervisión de obra dirigido por el <strong>Ing. Arq. Agustín Patraca Hernández</strong> (IPN ESIA Tecamachalco). Comprometidos con la seguridad estructural, la certeza jurídica y la excelencia arquitectónica.
+          </p>
+        </div>
+
+        <!-- Enlaces Rápidos -->
+        <div>
+          <h4 class="text-xs uppercase tracking-widest text-bronze-400 font-bold mb-4">Navegación</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+            <li><a href="#servicios" class="hover:text-white transition-colors">Catálogo de Servicios</a></li>
+            <li><a href="#trayectoria" class="hover:text-white transition-colors">Trayectoria y Proyectos</a></li>
+            <li><a href="#cotizador" class="hover:text-white transition-colors">Cotizador de Honorarios</a></li>
+            <li><a href="#contacto" class="hover:text-white transition-colors">Agendar Consulta</a></li>
+          </ul>
+        </div>
+
+        <!-- Normativas Aplicables -->
+        <div>
+          <h4 class="text-xs uppercase tracking-widest text-bronze-400 font-bold mb-4">Marco Normativo</h4>
+          <ul class="space-y-2 text-xs text-white/75">
+            <li>• Normas Técnicas Complementarias (NTC)</li>
+            <li>• Reglamentos de Construcción CDMX / Edo. Méx.</li>
+            <li>• Dictámenes Estructurales STPS</li>
+            <li>• Factibilidad Hidráulica CONAGUA</li>
+            <li>• Verificación Eléctrica UVIE / NOM-001-SEDE</li>
+            <li>• Agrimensura y Trámites RAN</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
+        <p>© 2026 STK Studio Ingeniería y Arquitectura. Todos los derechos reservados.</p>
+        <p>Aviso Técnico: Todos los proyectos y dictámenes se ejecutan bajo normatividad vigente y verificación en sitio.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Detalle de Servicios -->
+  <div id="service-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-forest-900/75 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-7 sm:p-8 shadow-2xl border border-forest-800/15 relative animate-fadeIn">
+      <button onclick="closeServiceModal()" aria-label="Cerrar detalle" class="absolute top-5 right-5 p-2 rounded-xl bg-stonewarm-100 hover:bg-forest-100 text-charcoal transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <span id="modal-badge" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-forest-100 text-forest-800">Especialidad</span>
+      <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-forest-900 mt-3">Título del Servicio</h3>
+      <p id="modal-desc" class="text-sm text-charcoal/80 mt-3 leading-relaxed"></p>
+      
+      <div class="mt-5 pt-5 border-t border-forest-800/10">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-forest-800 mb-3">Entregables Técnicos Incluidos:</h4>
+        <ul id="modal-list" class="space-y-2 text-sm text-charcoal/85"></ul>
+      </div>
+
+      <div class="mt-7 flex flex-col sm:flex-row gap-3">
+        <a href="#cotizador" onclick="closeServiceModal()" class="flex-1 py-3 px-5 rounded-xl bg-forest-800 hover:bg-forest-700 text-white text-center font-semibold text-sm transition-colors">
+          Estimar este Servicio
+        </a>
+        <a href="#contacto" onclick="closeServiceModal()" class="py-3 px-5 rounded-xl bg-stonewarm-100 hover:bg-forest-100 text-forest-900 text-center font-semibold text-sm transition-colors">
+          Agendar Asesoría
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts de Interactividad -->
+  <script>
+    // Inicializar iconos Lucide
+    lucide.createIcons();
+
+    // Menú móvil
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Animación Scroll Reveal y Contadores Numéricos
+    const revealElements = document.querySelectorAll('.reveal');
+    const counters = document.querySelectorAll('.counter');
+    let countersStarted = false;
+
+    function runCounters() {
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        const duration = 1600;
+        const stepTime = Math.max(Math.floor(duration / target), 20);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += 1;
+          counter.textContent = current;
+          if (current >= target) {
+            counter.textContent = target;
+            clearInterval(timer);
+          }
+        }, stepTime);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          if (entry.target.id === 'metrics-bar' && !countersStarted) {
+            countersStarted = true;
+            runCounters();
+          }
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => observer.observe(el));
+
+    // Filtro de pestañas en Catálogo de Servicios
+    const serviceTabs = document.querySelectorAll('.service-tab');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    serviceTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const category = tab.getAttribute('data-category');
+        
+        serviceTabs.forEach(t => {
+          t.classList.remove('bg-forest-800', 'text-white', 'shadow-sm');
+          t.classList.add('bg-stonewarm-100', 'text-charcoal');
+        });
+        tab.classList.remove('bg-stonewarm-100', 'text-charcoal');
+        tab.classList.add('bg-forest-800', 'text-white', 'shadow-sm');
+
+        serviceCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Modal de Alcances de Servicios
+    const serviceDetails = {
+      arquitectura: {
+        badge: 'Arquitectura y Diseño Ejecutivo',
+        title: 'Proyectos Ejecutivos, Condominios y Visualización 3D',
+        desc: 'Desarrollamos la carpeta arquitectónica completa con precisión técnica y estética, adaptada tanto a vivienda unifamiliar como a desarrollos en régimen de propiedad en condominio.',
+        items: [
+          'Plantas arquitectónicas, cortes, fachadas, detalles constructivos y acabados en AutoCAD / Revit.',
+          'Memorias arquitectónicas descriptivas para obra nueva, ampliación, casa dúplex y régimen de condominio.',
+          'Levantamiento arquitectónico físico y registro fotográfico detallado de inmuebles existentes.',
+          'Modelado 3D organizado y renders fotorrealistas en SketchUp, 3ds Max, V-Ray, Enscape y D5 Render.'
+        ]
+      },
+      estructuras: {
+        badge: 'Ingeniería Estructural y MEP',
+        title: 'Cálculo Estructural NTC, Dictámenes STPS e Ingenierías',
+        desc: 'Garantizamos la seguridad estructural y funcional de tu edificación mediante modelado matemático avanzado y cumplimiento estricto de las Normas Técnicas Complementarias.',
+        items: [
+          'Memoria de cálculo estructural y planos de cimentación, columnas, trabes y losas (SAP2000, ETABS, STAAD).',
+          'Inspección técnica y emisión de Dictámenes de Estabilidad Estructural para cumplimiento ante la STPS.',
+          'Cálculo y planos de instalaciones hidráulicas, sanitarias y eléctricas.',
+          'Gestión técnica para certificación eléctrica UVIE y factibilidad de servicios de agua ante CONAGUA.'
+        ]
+      },
+      topografia: {
+        badge: 'Topografía y Gestoría Normativa',
+        title: 'Levantamientos UTM, Trámites RAN y Licencias D.R.O.',
+        desc: 'Resolvemos la regularización física y documental de terrenos e inmuebles ante autoridades municipales, estatales y agrarias.',
+        items: [
+          'Planos topográficos georreferenciados con coordenadas UTM y análisis cartográfico en QGIS.',
+          'Trabajos de agrimensura, subdivisión de predios y gestión de expedientes ante el Registro Agrario Nacional (RAN).',
+          'Integración de expedientes para licencias de construcción, regularización de obra y permisos de demolición.',
+          'Trámites de alineamiento, número oficial y cambios de uso de suelo.'
+        ]
+      },
+      supervision: {
+        badge: 'Supervisión y Costos',
+        title: 'Residencia de Obra, Precios Unitarios y Avalúos',
+        desc: 'Controlamos la ejecución en campo y los recursos financieros de tu obra para evitar sobrecostos, retrasos y vicios ocultos.',
+        items: [
+          'Residencia de obra, apertura y seguimiento de bitácora, supervisión de albañilería, tablaroca e instalaciones.',
+          'Catálogos de conceptos y análisis de precios unitarios en Neodata.',
+          'Cuantificación de números generadores, revisión de estimaciones, conciliaciones y planos As-Built.',
+          'Levantamientos arquitectónicos e hidráulicos especializados para soporte de avalúos comerciales.'
+        ]
+      }
+    };
+
+    function openServiceModal(key) {
+      const data = serviceDetails[key];
+      if (!data) return;
+      document.getElementById('modal-badge').textContent = data.badge;
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-desc').textContent = data.desc;
+      
+      const list = document.getElementById('modal-list');
+      list.innerHTML = data.items.map(item => `
+        <li class="flex items-start gap-2.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-bronze-500 mt-2 shrink-0"></span>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      const modal = document.getElementById('service-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeServiceModal() {
+      const modal = document.getElementById('service-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    document.getElementById('service-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'service-modal') closeServiceModal();
+    });
+
+    // Calculadora / Estimador Interactivo de Honorarios
+    const calcService = document.getElementById('calc-service');
+    const calcProperty = document.getElementById('calc-property');
+    const calcSqm = document.getElementById('calc-sqm');
+    const calcSlider = document.getElementById('calc-slider');
+    const extraMemoria = document.getElementById('extra-memoria');
+    const extraInstalaciones = document.getElementById('extra-instalaciones');
+    const calcTotal = document.getElementById('calc-total');
+    const calcSummary = document.getElementById('calc-summary');
+
+    const serviceRates = {
+      proyecto: { base: 8500, perSqm: 135, label: 'Proyecto Arquitectónico y Ejecutivo' },
+      estructural: { base: 7500, perSqm: 105, label: 'Cálculo Estructural y Planos (NTC)' },
+      topografia: { base: 6500, perSqm: 28, label: 'Levantamiento Topográfico UTM / RAN' },
+      regularizacion: { base: 9000, perSqm: 85, label: 'Regularización / Dictamen STPS / D.R.O.' },
+      render: { base: 5500, perSqm: 45, label: 'Modelado 3D y Renderizado Fotorrealista' },
+      supervision: { base: 12000, perSqm: 115, label: 'Supervisión y Residencia de Obra' }
+    };
+
+    function formatMXN(amount) {
+      return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(amount);
+    }
+
+    function updateEstimate() {
+      const serviceKey = calcService.value;
+      const propertyMult = parseFloat(calcProperty.value);
+      let sqm = parseFloat(calcSqm.value) || 20;
+      if (sqm < 20) sqm = 20;
+
+      const rate = serviceRates[serviceKey];
+      // Factor de escala para superficies grandes
+      const scaleDiscount = sqm > 600 ? 0.82 : (sqm > 300 ? 0.9 : 1.0);
+      let minEstimate = (rate.base + (sqm * rate.perSqm * scaleDiscount)) * propertyMult;
+
+      if (extraMemoria.checked) minEstimate += 3800;
+      if (extraInstalaciones.checked) minEstimate += (4500 + sqm * 25);
+
+      minEstimate = Math.round(minEstimate / 100) * 100;
+      const maxEstimate = Math.round((minEstimate * 1.2) / 100) * 100;
+
+      const propText = calcProperty.options[calcProperty.selectedIndex].text;
+      calcTotal.textContent = `${formatMXN(minEstimate)} – ${formatMXN(maxEstimate)} MXN`;
+      calcSummary.textContent = `Basado en ${sqm.toLocaleString('es-MX')} m² para ${propText} • ${rate.label}.`;
+    }
+
+    calcSlider.addEventListener('input', () => {
+      calcSqm.value = calcSlider.value;
+      updateEstimate();
+    });
+
+    calcSqm.addEventListener('input', () => {
+      if (calcSqm.value <= 2500) calcSlider.value = calcSqm.value;
+      updateEstimate();
+    });
+
+    [calcService, calcProperty, extraMemoria, extraInstalaciones].forEach(el => {
+      el.addEventListener('change', updateEstimate);
+    });
+
+    updateEstimate();
+
+    // Envío de Cotización por WhatsApp y Correo
+    document.getElementById('send-quote-wa').addEventListener('click', () => {
+      const msg = `Hola Ing. Arq. Agustín Patraca (STK Studio), realicé una estimación en su sitio web:\n\n` +
+                  `• Servicio: ${serviceRates[calcService.value].label}\n` +
+                  `• Inmueble: ${calcProperty.options[calcProperty.selectedIndex].text}\n` +
+                  `• Superficie: ${calcSqm.value} m²\n` +
+                  `• Estimado Preliminar: ${calcTotal.textContent}\n\n` +
+                  `Me gustaría agendar una asesoría para formalizar mi cotización.`;
+      window.open(`https://wa.me/525638006027?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    });
+
+    document.getElementById('send-quote-email').addEventListener('click', () => {
+      const subject = `Solicitud de Cotización Formal - STK Studio (${serviceRates[calcService.value].label})`;
+      const body = `Estimado Ing. Arq. Agustín Patraca Hernández,\n\n` +
+                   `Solicito una cotización formal con base en los siguientes parámetros:\n` +
+                   `- Servicio: ${serviceRates[calcService.value].label}\n` +
+                   `- Tipo de inmueble: ${calcProperty.options[calcProperty.selectedIndex].text}\n` +
+                   `- Superficie estimada: ${calcSqm.value} m²\n` +
+                   `- Rango estimado en web: ${calcTotal.textContent}\n\n` +
+                   `Quedo atento a su respuesta para coordinar revisión técnica.`;
+      window.location.href = `mailto:arquitecturastudiok@gmail.com?cc=patracahernandezadal@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
+    // Formulario de Contacto Directo
+    const contactForm = document.getElementById('contact-form');
+    const formFeedback = document.getElementById('form-feedback');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('form-name').value.trim();
+      const phone = document.getElementById('form-phone').value.trim();
+      const email = document.getElementById('form-email').value.trim();
+      const service = document.getElementById('form-service').value;
+      const location = document.getElementById('form-location').value.trim();
+      const message = document.getElementById('form-message').value.trim();
+
+      const waText = `Hola Ing. Arq. Agustín Patraca (STK Studio), solicito una consulta técnica:\n\n` +
+                     `• Nombre: ${name}\n` +
+                     `• Teléfono: ${phone}\n` +
+                     (email ? `• Correo: ${email}\n` : '') +
+                     `• Área: ${service}\n` +
+                     (location ? `• Ubicación del predio: ${location}\n` : '') +
+                     `• Detalles: ${message}`;
+
+      formFeedback.textContent = 'Abriendo WhatsApp Business con los datos de tu consulta...';
+      formFeedback.classList.remove('hidden');
+      window.open(`https://wa.me/525638006027?text=${encodeURIComponent(waText)}`, '_blank', 'noopener,noreferrer');
+    });
+
+    document.getElementById('form-email-btn').addEventListener('click', () => {
+      const name = document.getElementById('form-name').value.trim() || 'Cliente Interesado';
+      const phone = document.getElementById('form-phone').value.trim();
+      const service = document.getElementById('form-service').value;
+      const location = document.getElementById('form-location').value.trim();
+      const message = document.getElementById('form-message').value.trim();
+
+      const subject = `Consulta Técnica STK Studio - ${service} (${name})`;
+      const body = `Nombre: ${name}\nTeléfono: ${phone}\nServicio: ${service}\nUbicación: ${location}\n\nDescripción del proyecto:\n${message}`;
+      window.location.href = `mailto:arquitecturastudiok@gmail.com?cc=patracahernandezadal@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+  </script>
+  <!-- STK Studio: capa adicional de integraciones; no sustituye scripts originales -->
+  <script src="./integrations/config.js"></script>
+  <script src="./integrations/stk-integrations.js"></script>
+</body>
+</html>
